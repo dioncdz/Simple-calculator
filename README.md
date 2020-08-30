@@ -13,3 +13,4 @@ Things to fix:
 Things to add
 1. Negation
 2. Percent
+3. Usable even with keypresses
