@@ -52,6 +52,14 @@ h4 {
    color: #ADB5BD;
 }
 
+.clear {
+   grid-column: 1/span 2;
+}
+
+.delete {
+   grid-column: 3/span 2;
+}
+
 .button {
    font-size: 1.5rem;
    font-weight: 500;
@@ -61,7 +69,7 @@ h4 {
    font-family: 'Courier New', Courier, monospace;
 }
 
-.delete, .multiply, .divide, .plus, .minus, .equals {
+.clear, .delete, .multiply, .divide, .sum, .subtract, .equals {
    background: #ADB5BD;
    border: 1px outset #495057;
 }

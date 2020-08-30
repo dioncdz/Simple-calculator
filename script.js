@@ -48,9 +48,24 @@ function operate() {
       result = divide(getHistory(), getCurrent());
    }
 
-   // UPDATE UI
    lastValue.innerHTML = result;
    currentValue.innerHTML = '';
+}
+
+function getOperation() {
+   if(this.classList.contains(`${this.id}`)) {
+      if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
+         operate();
+         operation = `${this.id}`; 
+         currentValue.innerHTML = '';
+      } else if (lastValue.innerHTML === '') {
+         lastValue.innerHTML = currentValue.innerHTML;
+         currentValue.innerHTML = '';
+         operation = `${this.id}`; 
+      } else {
+         operation = `${this.id}`; 
+      }
+   } 
 }
 
 function addDecimal() {
@@ -74,59 +89,12 @@ function deleteAll() {
  * // ADD EVENT LISTENERS
  ***********************************************/
 operators.forEach(operator => {
-   operator.addEventListener('click', e => {
-      if(e.target.classList.contains('plus')) {
-         if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
-            operate();
-            operation = 'sum'; 
-            currentValue.innerHTML = '';
-         } else if (lastValue.innerHTML === '') {
-            lastValue.innerHTML = currentValue.innerHTML;
-            currentValue.innerHTML = '';
-            operation = 'sum'; 
-         } 
-
-      } 
-      else if (e.target.classList.contains('minus')) {
-         if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
-            operate();
-            operation = 'subtract'; 
-            currentValue.innerHTML = '';
-         } else if (lastValue.innerHTML === '') {
-            lastValue.innerHTML = currentValue.innerHTML;
-            currentValue.innerHTML = '';
-            operation = 'subtract'; 
-         } 
-      }
-      else if (e.target.classList.contains('multiply')) {
-         if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
-            operate();
-            operation = 'multiply'; 
-            currentValue.innerHTML = '';
-         } else if (lastValue.innerHTML === '') {
-            lastValue.innerHTML = currentValue.innerHTML;
-            currentValue.innerHTML = '';
-            operation = 'multiply'; 
-         } 
-      }
-      else if (e.target.classList.contains('divide')) {
-         if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
-            operate();
-            operation = 'divide'; 
-            currentValue.innerHTML = '';
-         } else if (lastValue.innerHTML === '') {
-            lastValue.innerHTML = currentValue.innerHTML;
-            currentValue.innerHTML = '';
-            operation = 'divide'; 
-         } 
-      }
-   })
+   operator.addEventListener('click', getOperation)
 })
 
 numbers.forEach(number => {
    number.addEventListener('click', e => {
       currentValue.innerHTML += `${e.target.innerText}`;
-      console.dir(e.target.innerText);
    })
 })
 
