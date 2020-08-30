@@ -4,7 +4,7 @@ URL: https://dioncdz.github.io/Simple-calculator/
 
 This is my first calculator. Nothing fancy. Just a simple calculator.
 
-...still a working progress, fixing things one at a time.
+...still a work in progress, fixing things one at a time.
 
 Things to fix:
 1. Floating point numbers
