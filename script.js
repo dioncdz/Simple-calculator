@@ -24,6 +24,7 @@ function sum(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
 function multiply(a, b) { return a * b; }
 function divide(a, b) { return a / b; }
+function percent(a, b) {console.log('object'); return (a * (b / 100)); }
 
 function operate() {
    if(lastValue.innerHTML === ''|| currentValue.innerHTML === '') {
@@ -48,24 +49,29 @@ function operate() {
       result = divide(getHistory(), getCurrent());
    }
 
+   else if (operation === 'percent') {
+      result = percent(getHistory(), getCurrent());
+   }
+
+   
    lastValue.innerHTML = result;
    currentValue.innerHTML = '';
 }
 
 function getOperation() {
-   if(this.classList.contains(`${this.id}`)) {
-      if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
-         operate();
-         operation = `${this.id}`; 
-         currentValue.innerHTML = '';
-      } else if (lastValue.innerHTML === '') {
-         lastValue.innerHTML = currentValue.innerHTML;
-         currentValue.innerHTML = '';
-         operation = `${this.id}`; 
-      } else {
-         operation = `${this.id}`; 
-      }
-   } 
+   if(lastValue.innerHTML !== '' && currentValue.innerHTML !== '') {
+      operate();
+      operation = `${this.id}`; 
+      currentValue.innerHTML = '';
+   } else if (lastValue.innerHTML === '') {
+      lastValue.innerHTML = currentValue.innerHTML;
+      currentValue.innerHTML = '';
+      operation = `${this.id}`; 
+   } else {
+      operation = `${this.id}`; 
+   }
+
+   console.log(this.id);
 }
 
 function addDecimal() {
@@ -75,6 +81,14 @@ function addDecimal() {
       currentValue.innerHTML += `0.`;   
    } else {
       currentValue.innerHTML += `.`;
+   }
+}
+
+function changeSign() {
+   if(currentValue.innerHTML !== '') {
+      return (currentValue.innerHTML = getCurrent() * -1);
+   } else {
+      return;
    }
 }
 
@@ -98,12 +112,14 @@ numbers.forEach(number => {
    })
 })
 
-decimal.addEventListener('click', addDecimal)
+negate.addEventListener('click', changeSign);
 
-del.addEventListener('click', deleteLast)
+decimal.addEventListener('click', addDecimal);
 
-clear.addEventListener('click', deleteAll)
+del.addEventListener('click', deleteLast);
 
-equals.addEventListener('click', operate)
+clear.addEventListener('click', deleteAll);
+
+equals.addEventListener('click', operate);
 
 
