@@ -23,39 +23,19 @@ function getCurrent() {return parseFloat(currentValue.innerHTML);}
 function sum(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
 function multiply(a, b) { return a * b; }
-function divide(a, b) { return a / b; }
-function percent(a, b) {console.log('object'); return (a * (b / 100)); }
+function percent(a, b) { return (a * (b / 100)); }
+function divide(a, b) { return b === 0 ? 'error' : a / b; }
 
 function operate() {
    if(lastValue.innerHTML === ''|| currentValue.innerHTML === '') {
       return;
    }
 
-   let result; 
-
-   if(operation === 'sum') {
-      result = sum(getHistory(), getCurrent());
-   } 
-
-   else if (operation === 'subtract') {
-      result = subtract(getHistory(), getCurrent());
-   }
-
-   else if (operation === 'multiply') {
-      result = multiply(getHistory(), getCurrent());
-   }
-
-   else if (operation === 'divide') {
-      result = divide(getHistory(), getCurrent());
-   }
-
-   else if (operation === 'percent') {
-      result = percent(getHistory(), getCurrent());
-   }
-
+   let result = window[operation](getHistory(), getCurrent()); 
    
    lastValue.innerHTML = result;
    currentValue.innerHTML = '';
+   operation = 'null';
 }
 
 function getOperation() {
@@ -70,8 +50,6 @@ function getOperation() {
    } else {
       operation = `${this.id}`; 
    }
-
-   console.log(this.id);
 }
 
 function addDecimal() {
