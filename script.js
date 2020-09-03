@@ -31,7 +31,7 @@ function operate() {
       return;
    }
 
-   let result = window[operation](getHistory(), getCurrent()).toPrecision(16); 
+   let result = new Big(window[operation](getHistory(), getCurrent()).toPrecision(16)); 
    
    lastValue.innerHTML = result;
    currentValue.innerHTML = '';
