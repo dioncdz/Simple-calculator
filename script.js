@@ -17,8 +17,8 @@ let operation;
  /***********************************************
  * // CREATE FUNCTIONS
  ***********************************************/
-function getHistory() {return parseFloat(lastValue.innerHTML);}
-function getCurrent() {return parseFloat(currentValue.innerHTML);}
+function getHistory() {return parseFloat(lastValue.innerHTML)}
+function getCurrent() {return parseFloat(currentValue.innerHTML)}
 
 function sum(a, b) { return a + b; }
 function subtract(a, b) { return a - b; }
@@ -31,7 +31,7 @@ function operate() {
       return;
    }
 
-   let result = window[operation](getHistory(), getCurrent()); 
+   let result = window[operation](getHistory(), getCurrent()).toPrecision(16); 
    
    lastValue.innerHTML = result;
    currentValue.innerHTML = '';
@@ -70,7 +70,9 @@ function changeSign() {
    }
 }
 
-function deleteLast() { currentValue.innerHTML = currentValue.innerHTML.slice(0, -1); }
+function deleteLast() { 
+   currentValue.innerHTML = currentValue.innerHTML.slice(0, -1); 
+}
 
 function deleteAll() {
    currentValue.innerHTML = '';
@@ -86,6 +88,10 @@ operators.forEach(operator => {
 
 numbers.forEach(number => {
    number.addEventListener('click', e => {
+      if(operation === 'null') {
+         lastValue.innerHTML = '';
+      }
+
       currentValue.innerHTML += `${e.target.innerText}`;
    })
 })
